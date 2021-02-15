@@ -10,9 +10,21 @@
 
 ## Installation
 
+Gradle (`build.gradle`):
 ```
 implementation("com.gingerpayments:ginger-java:2.1.0")
 ```
+
+Maven (`pom.xml`):
+```
+<dependency>
+    <groupId>com.gingerpayments</groupId>
+    <artifactId>ginger-java</artifactId>
+    <version>2.1.0</version>
+</dependency>
+```
+
+The library jar file can also be downloaded directly from [Maven Central](https://search.maven.org/search?q=ginger-java).
 
 ## Getting started
 
