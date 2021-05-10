@@ -1,6 +1,6 @@
 language: java
 jdk:
-  openjdk8
+  openjdk9
 env:
   - GINGER_ENDPOINT=http://www.example.com/ GINGER_API_KEY=example
 before_cache:

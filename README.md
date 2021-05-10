@@ -6,7 +6,7 @@
 
 ## Requirements
 
-* Java 8 or later
+* Java 9 or later
 
 ## Installation
 
