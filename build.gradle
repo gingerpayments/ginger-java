@@ -88,8 +88,6 @@ publishing {
 
                 developers {
                     developer {
-                        name = 'Maarten Sander'
-                        email = 'maarten.sander@gingerpayments.com'
                         organization = 'Ginger'
                         organizationUrl = 'https://www.gingerpayments.com/'
                     }
