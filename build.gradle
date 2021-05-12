@@ -1,8 +1,12 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
 
+group = 'com.gingerpayments'
 version = '2.1.0'
+archivesBaseName = project.name
 
 repositories {
     mavenCentral()
@@ -30,11 +34,18 @@ dependencies {
     examplesImplementation 'junit:junit:4.13.1'
 }
 
-jar {
-    manifest {
-        attributes('Implementation-Title': project.name,
-                   'Implementation-Version': project.version)
-    }
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
 }
 
 task examples(type: Test) {
@@ -51,4 +62,63 @@ task examples(type: Test) {
     testClassesDirs = sourceSets.examples.output.classesDirs
     classpath = sourceSets.examples.runtimeClasspath
     shouldRunAfter test
+}
+
+jar {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                   'Implementation-Version': project.version)
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            pom {
+                name = project.group + ':' + project.name
+                description = 'Java SDK for connecting to APIs managed by Ginger Payments.'
+                url = 'https://github.com/gingerpayments/ginger-java'
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+
+                developers {
+                    developer {
+                        name = 'Maarten Sander'
+                        email = 'maarten.sander@gingerpayments.com'
+                        organization = 'Ginger'
+                        organizationUrl = 'https://www.gingerpayments.com/'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git://github.com/gingerpayments/ginger-java.git'
+                    developerConnection = 'scm:git:ssh://github.com:gingerpayments/ginger-java.git'
+                    url = 'http://github.com/gingerpayments/ginger-java/tree/master'
+                }
+            }
+
+            repositories {
+                maven {
+                    def releasesRepoUrl = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+                    def snapshotsRepoUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+                    url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                    credentials {
+                        username = ossrhUsername
+                        password = ossrhPassword
+                    }
+                }
+            }
+        }
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign configurations.archives
+    sign publishing.publications.mavenJava
 }
