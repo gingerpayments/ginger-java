@@ -24,7 +24,7 @@ Maven (`pom.xml`):
 </dependency>
 ```
 
-The library jar file can also be downloaded directly from [Maven Central](https://search.maven.org/search?q=ginger-java).
+The library jar file can also be downloaded directly from [Maven Central](https://search.maven.org/artifact/com.gingerpayments/ginger-java/2.1.0/jar).
 
 ## Getting started
 
