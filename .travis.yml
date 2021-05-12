@@ -2,7 +2,7 @@ language: java
 jdk:
   openjdk9
 env:
-  - GINGER_ENDPOINT=http://www.example.com/ GINGER_API_KEY=example
+  - GINGER_ENDPOINT=http://www.example.com/ GINGER_API_KEY=not_used ORG_GRADLE_PROJECT_ossrhUsername=not_used ORG_GRADLE_PROJECT_ossrhPassword=not_used
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
