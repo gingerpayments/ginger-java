@@ -64,6 +64,10 @@ task examples(type: Test) {
     shouldRunAfter test
 }
 
+tasks.withType(Sign) {
+    onlyIf { gradle.taskGraph.hasTask("publish") }
+}
+
 jar {
     manifest {
         attributes('Implementation-Title': project.name,
