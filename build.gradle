@@ -51,13 +51,13 @@ artifacts {
 task examples(type: Test) {
     description = 'Runs examples.'
 
+    inputs.property 'GINGER_ENDPOINT', System.getenv().get("GINGER_ENDPOINT")
+    inputs.property 'GINGER_API_KEY', System.getenv().get("GINGER_API_KEY")
+
     testLogging {
         events "standardOut", "standardError"
         outputs.upToDateWhen { false }
     }
-
-    if (!System.getenv('GINGER_ENDPOINT')) { throw new StopExecutionException("Please configure GINGER_ENDPOINT") }
-    if (!System.getenv('GINGER_API_KEY')) { throw new StopExecutionException("Please configure GINGER_API_KEY") }
 
     testClassesDirs = sourceSets.examples.output.classesDirs
     classpath = sourceSets.examples.runtimeClasspath
