@@ -100,7 +100,7 @@ publishing {
                 scm {
                     connection = 'scm:git:git://github.com/gingerpayments/ginger-java.git'
                     developerConnection = 'scm:git:ssh://github.com:gingerpayments/ginger-java.git'
-                    url = 'http://github.com/gingerpayments/ginger-java/tree/master'
+                    url = 'https://github.com/gingerpayments/ginger-java/tree/master'
                 }
             }
 
