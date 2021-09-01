@@ -1,6 +1,6 @@
 # Ginger Java bindings
 
-[![Build Status](https://img.shields.io/travis/com/gingerpayments/ginger-java)](https://travis-ci.com/gingerpayments/ginger-java)
+[![Build Status](https://img.shields.io/travis/com/gingerpayments/ginger-java)](https://app.travis-ci.com/github/gingerpayments/ginger-java)
 [![Maven Central](https://img.shields.io/maven-central/v/com.gingerpayments/ginger-java)](https://search.maven.org/artifact/com.gingerpayments/ginger-java)
 [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/gingerpayments/ginger-java/blob/master/LICENSE)
 
