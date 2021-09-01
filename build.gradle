@@ -1,11 +1,11 @@
 plugins {
     id 'java-library'
-    id 'maven-publish'
+    id 'maven'
     id 'signing'
 }
 
 group = 'com.gingerpayments'
-version = '2.1.0'
+version = '2.1.1'
 archivesBaseName = project.name
 
 repositories {
@@ -64,10 +64,6 @@ task examples(type: Test) {
     shouldRunAfter test
 }
 
-tasks.withType(Sign) {
-    onlyIf { gradle.taskGraph.hasTask("publish") }
-}
-
 jar {
     manifest {
         attributes('Implementation-Title': project.name,
@@ -75,11 +71,22 @@ jar {
     }
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            pom {
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
                 name = project.group + ':' + project.name
+                packaging = 'jar'
                 description = 'Java SDK for connecting to APIs managed by Ginger Payments.'
                 url = 'https://github.com/gingerpayments/ginger-java'
 
@@ -103,18 +110,6 @@ publishing {
                     url = 'https://github.com/gingerpayments/ginger-java/tree/master'
                 }
             }
-
-            repositories {
-                maven {
-                    def releasesRepoUrl = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
-                    def snapshotsRepoUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
-                    url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-                    credentials {
-                        username = ossrhUsername
-                        password = ossrhPassword
-                    }
-                }
-            }
         }
     }
 }
@@ -122,5 +117,4 @@ publishing {
 signing {
     useGpgCmd()
     sign configurations.archives
-    sign publishing.publications.mavenJava
 }
