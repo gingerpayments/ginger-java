@@ -12,26 +12,12 @@ repositories {
     mavenCentral()
 }
 
-sourceSets {
-    examples {
-        compileClasspath += sourceSets.main.output
-        runtimeClasspath += sourceSets.main.output
-    }
-}
-
-configurations {
-    examplesImplementation.extendsFrom implementation
-    examplesRuntimeOnly.extendsFrom runtimeOnly
-}
-
 dependencies {
     api 'com.squareup.okhttp3:okhttp:4.9.1'
     api 'org.json:json:20201115'
 
     testImplementation 'junit:junit:4.13.1'
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
-
-    examplesImplementation 'junit:junit:4.13.1'
 }
 
 task javadocJar(type: Jar) {
@@ -46,22 +32,6 @@ task sourcesJar(type: Jar) {
 
 artifacts {
     archives javadocJar, sourcesJar
-}
-
-task examples(type: Test) {
-    description = 'Runs examples.'
-
-    inputs.property 'GINGER_ENDPOINT', System.getenv().get("GINGER_ENDPOINT")
-    inputs.property 'GINGER_API_KEY', System.getenv().get("GINGER_API_KEY")
-
-    testLogging {
-        events "standardOut", "standardError"
-        outputs.upToDateWhen { false }
-    }
-
-    testClassesDirs = sourceSets.examples.output.classesDirs
-    classpath = sourceSets.examples.runtimeClasspath
-    shouldRunAfter test
 }
 
 jar {

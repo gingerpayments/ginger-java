@@ -141,13 +141,7 @@ The `result` variable would then contain the JSON string returned by the API.
 
 ## Running the examples
 
-```
-export GINGER_ENDPOINT="https://api.example.com"
-export GINGER_API_KEY="your-api-key"
-
-./gradlew examples --tests IdealPayment
-./gradlew examples --tests PaymentWithMethodSelection
-```
+The examples live in their own repository; see https://github.com/gingerpayments/ginger-java-example.
 
 ## Custom HTTP client
 
