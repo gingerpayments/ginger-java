@@ -20,11 +20,11 @@ Maven (`pom.xml`):
 <dependency>
     <groupId>com.gingerpayments</groupId>
     <artifactId>ginger-java</artifactId>
-    <version>2.1.0</version>
+    <version>2.1.1</version>
 </dependency>
 ```
 
-The library jar file can also be downloaded directly from [Maven Central](https://search.maven.org/artifact/com.gingerpayments/ginger-java/2.1.0/jar).
+The library jar file can also be downloaded directly from [Maven Central](https://search.maven.org/artifact/com.gingerpayments/ginger-java/2.1.1/jar).
 
 ## Getting started
 
